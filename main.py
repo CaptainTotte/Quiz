@@ -1,18 +1,17 @@
-from fastapi import FastAPI, HTTPException, Depends, status, Form, Request, Response
+from fastapi import FastAPI, Request, HTTPException, Depends, status, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.templating import Jinja2Templates
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import json
 import os
-import re
 
 app = FastAPI()
 
-# Mount the static folder to serve static files (CSS, JS, etc.)
+# Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Set up Jinja2 templates for the admin panel
+# Set up Jinja2 templates
 templates = Jinja2Templates(directory="templates")
 
 # Basic authentication for admin panel
@@ -56,9 +55,15 @@ def authenticate_admin(credentials: HTTPBasicCredentials = Depends(security)):
         )
     return credentials.username
 
-# Endpoint to serve the admin panel
+# Serve index.html
+@app.get("/", response_class=HTMLResponse)
+async def read_root():
+    with open("static/index.html") as f:
+        return HTMLResponse(content=f.read())
+
+# Serve admin.html
 @app.get("/admin", response_class=HTMLResponse)
-def admin_panel(request: Request, username: str = Depends(authenticate_admin)):
+async def admin_panel(request: Request, username: str = Depends(authenticate_admin)):
     data = load_questions()
     # Check for a flash message in cookies
     flash_message = request.cookies.get("flash_message", None)
@@ -69,7 +74,7 @@ def admin_panel(request: Request, username: str = Depends(authenticate_admin)):
 
 # Endpoint to update questions
 @app.post("/admin/update")
-def update_questions(
+async def update_questions(
     category: str = Form(...),
     points: str = Form(...),
     type: str = Form(...),
@@ -99,7 +104,7 @@ def update_questions(
 
 # Endpoint to delete a question
 @app.post("/admin/delete")
-def delete_question(
+async def delete_question(
     category: str = Form(...),
     points: str = Form(...),
     username: str = Depends(authenticate_admin),
@@ -112,18 +117,13 @@ def delete_question(
 
 # Existing endpoints
 @app.get("/categories")
-def get_categories():
+async def get_categories():
     data = load_questions()
     return {"categories": data["categories"]}
 
 @app.get("/questions/{points}")
-def get_questions(points: str):
+async def get_questions(points: str):
     data = load_questions()
     if points not in data["questions"]:
         raise HTTPException(status_code=404, detail="Points not found")
     return {"questions": data["questions"][points]}
-
-@app.get("/", response_class=HTMLResponse)
-def read_root():
-    with open("static/index.html") as f:
-        return f.read()

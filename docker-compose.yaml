@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"  # Mappa port 8000 på värden till port 8000 i containern
+    volumes:
+      - .:/app       # Montera projektkatalogen för live-uppdateringar under utveckling
+    environment:
+      - APP_ENV=development  # Miljövariabler (kan anpassas)

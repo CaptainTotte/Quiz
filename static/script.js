@@ -4,14 +4,15 @@ const points = ['200', '400', '600', '800', '1000'];
 const gameBoard = document.getElementById('game-board');
 const modal = document.getElementById('modal');
 const questionContent = document.getElementById('question-content');
+const resetButton = document.getElementById('reset-button');
 
-// Ladda kategorier och frågor
+// Load categories and questions
 async function loadGame() {
     const categoriesResponse = await fetch(categoriesUrl);
     const categoriesData = await categoriesResponse.json();
     const categories = categoriesData.categories;
 
-    // Skapa rubrikrad
+    // Create header row
     const headerRow = gameBoard.insertRow();
     categories.forEach(category => {
         const th = document.createElement('th');
@@ -19,58 +20,98 @@ async function loadGame() {
         headerRow.appendChild(th);
     });
 
-    // Skapa frågerader
+    // Create question rows
     points.forEach(point => {
         const row = gameBoard.insertRow();
         categories.forEach(category => {
             const cell = row.insertCell();
             cell.innerText = point;
-            cell.onclick = () => showQuestion(category, point); // Visa fråga vid klick
+            cell.dataset.category = category; // Store category in dataset
+            cell.dataset.points = point; // Store points in dataset
+            cell.onclick = () => showQuestion(category, point, cell); // Pass the clicked cell
         });
     });
 }
 
-// Visa frågan i modalen
-async function showQuestion(category, point) {
+// Show the question in modal
+async function showQuestion(category, point, clickedCell) {
     const response = await fetch(questionsUrl(point));
     const questionsData = await response.json();
     const question = questionsData.questions.find(q => q.category === category);
-    
+
     if (question) {
-        if (question.type === 'text') {
-            questionContent.innerHTML = `<p style="font-size: 3rem; font-weight: bold; text-align: center;">${question.content}</p>`;
-        } else if (question.type === 'image') {
-            questionContent.innerHTML = `
-                <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                    <img src="${question.content}" alt="Question" style="max-width: 70%; max-height: 70%; object-fit: contain;">
-                </div>
-            `;
-        } else if (question.type === 'video') {
-            // Kolla om videon är från YouTube eller Vimeo
-            let videoUrl = question.content;
-            if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
-                // YouTube-video: Ta bort titel och kontroller
-                videoUrl = videoUrl.replace(/(\?|&)list=.*/, ''); // Ta bort spellisteparameter
-                videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'autoplay=1&controls=0&modestbranding=1&rel=0&disablekb=1';
+        // Calculate the position of the clicked cell relative to the viewport
+        const rect = clickedCell.getBoundingClientRect();
+        const centerX = window.innerWidth / 2 - rect.left - rect.width / 2;
+        const centerY = window.innerHeight / 2 - rect.top - rect.height / 2;
+
+        // Set custom properties for the animation
+        clickedCell.style.setProperty('--start-x', `${-centerX}px`);
+        clickedCell.style.setProperty('--start-y', `${-centerY}px`);
+        clickedCell.style.setProperty('--start-top', `${rect.top}px`);
+        clickedCell.style.setProperty('--start-left', `${rect.left}px`);
+
+        // Add zoom-in effect to the clicked cell
+        clickedCell.classList.add('zoom-in');
+
+        // Wait for the animation to finish before showing the modal
+        clickedCell.addEventListener('animationend', () => {
+            clickedCell.classList.remove('zoom-in');
+            clickedCell.classList.add('hidden'); // Hide the cell after animation
+
+            // Show the modal and set its content
+            modal.style.display = 'flex';
+
+            if (question.type === 'text') {
                 questionContent.innerHTML = `
-                    <div class="video-container">
-                        <iframe src="${videoUrl}" title="Video Question" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        <div class="youtube-overlay"></div>
+                    <div style="margin: 30px;">
+                        <p style="font-size: 3rem; font-weight: bold; text-align: center;">${question.content}</p>
                     </div>
                 `;
-            } else if (videoUrl.includes('vimeo.com')) {
-                // Vimeo-video: Ta bort titel och kontroller
-                videoUrl = videoUrl.replace(/(\?|&)title=.*/, ''); // Ta bort befintlig titelparameter
-                videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'autoplay=1&title=0&byline=0&portrait=0';
-                questionContent.innerHTML = `<iframe src="${videoUrl}" title="Video Question" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            } else if (question.type === 'image') {
+                questionContent.innerHTML = `
+                    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                        <img src="${question.content}" alt="Question" style="max-width: 70%; max-height: 70%; object-fit: contain;">
+                    </div>
+                `;
+            } else if (question.type === 'video') {
+                // Check if the video is from YouTube or Vimeo
+                let videoUrl = question.content;
+                if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+                    // YouTube video: Strip title and controls
+                    videoUrl = videoUrl.replace(/(\?|&)list=.*/, ''); // Remove playlist parameter
+                    videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'autoplay=1&controls=0&modestbranding=1&rel=0&disablekb=1';
+                    questionContent.innerHTML = `
+                        <div class="video-container">
+                            <iframe src="${videoUrl}" title="Video Question" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <div class="youtube-overlay"></div>
+                        </div>
+                    `;
+                } else if (videoUrl.includes('vimeo.com')) {
+                    // Vimeo video: Strip title and controls
+                    videoUrl = videoUrl.replace(/(\?|&)title=.*/, ''); // Remove existing title parameter
+                    videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'autoplay=1&title=0&byline=0&portrait=0';
+                    questionContent.innerHTML = `<iframe src="${videoUrl}" title="Video Question" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                }
             }
-        }
-
-        modal.style.display = 'flex'; // Visa modalen som flex
+        }, { once: true });
     }
 }
 
-// Stäng modalen när 'ESC' trycks
+// Reset all cards
+resetButton.addEventListener('click', () => {
+    const cells = document.querySelectorAll('td');
+    cells.forEach(cell => {
+        cell.classList.remove('hidden'); // Remove the hidden class
+        cell.classList.add('pop-effect'); // Add pop effect
+        // Remove the pop effect after the animation ends
+        cell.addEventListener('animationend', () => {
+            cell.classList.remove('pop-effect');
+        }, { once: true });
+    });
+});
+
+// Close the modal when 'ESC' is pressed
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         closeModal();
@@ -79,7 +120,7 @@ document.addEventListener('keydown', (event) => {
 
 function closeModal() {
     modal.style.display = 'none';
-    questionContent.innerHTML = ''; // Rensa innehåll vid stängning
+    questionContent.innerHTML = ''; // Clear content on close
 }
 
-window.onload = loadGame; // Ladda spelet när sidan laddas
+window.onload = loadGame; // Load game when the page loads

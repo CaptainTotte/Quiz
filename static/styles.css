@@ -1,6 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #081653; /* Bakgrundsfärg */
+    margin: 0;
+    padding: 0;
 }
 
 table {
@@ -41,13 +43,13 @@ th {
     vertical-align: middle; /* Centrera texten vertikalt */
 }
 
-/* Centrera innehållet i boxarna */
-td div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+/* Större text och centrering för poängboxarna */
+td {
+    font-size: 2.5rem; /* Stor textstorlek */
+    font-weight: bold; /* Fet text */
+    display: table-cell; /* Behåll tabell-cell-layout */
+    vertical-align: middle; /* Centrera texten vertikalt */
+    text-align: center; /* Centrera texten horisontellt */
 }
 
 /* Ta bort hover-effekt för kategorier */
@@ -59,6 +61,75 @@ th:hover {
 td:hover {
     transform: translateY(-5px); /* Lyft boxen vid hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Starkare skugga vid hover */
+}
+
+/* Reset Button */
+.reset-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #7BBF42; /* Grön bakgrund */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #6aa83a; /* Mörkare grön vid hover */
+}
+
+/* Hidden class for cards */
+.hidden {
+    visibility: hidden;
+    pointer-events: none; /* Inaktivera klick på dolda kort */
+}
+
+/* Zoom-in animation for cards */
+@keyframes zoomIn {
+    0% {
+        transform: scale(1) translate(var(--start-x), var(--start-y));
+        opacity: 1;
+    }
+    100% {
+        transform: scale(5) translate(0, 0); /* Zoom in and move to center */
+        opacity: 0.9; /* Mindre transparent (ändrat från 0 till 0.5) */
+    }
+}
+
+.zoom-in {
+    animation: zoomIn 0.4s ease-in-out forwards; /* Snabbare och smidigare animation */
+    position: fixed; /* Fix the card position during animation */
+    z-index: 1000; /* Ensure it appears above other elements */
+    pointer-events: none; /* Disable clicks during animation */
+    top: var(--start-top); /* Start from the clicked card's position */
+    left: var(--start-left); /* Start from the clicked card's position */
+    transform-origin: center; /* Zoom from the center of the card */
+}
+
+/* Pop animation for reset */
+@keyframes pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.pop-effect {
+    animation: pop 0.5s ease-out;
 }
 
 .modal {
@@ -116,7 +187,7 @@ td:hover {
     left: 0;
     width: 100%;
     height: 15%; /* Justera höjden för att täcka titelområdet */
-    background: rgb(0, 0, 0); /* Genomskinlig svart overlay */
+    background: rgba(0, 0, 0, 0.8); /* Genomskinlig svart overlay */
     pointer-events: none; /* Se till att klick går igenom till iframe */
     z-index: 1; /* Placera overlay ovanpå iframe */
 }
