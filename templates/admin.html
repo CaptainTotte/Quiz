@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/admin.css"> <!-- Link to the admin-specific CSS file -->
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Admin Panel</h1>
+
+        <form class="admin-form" action="/admin/update" method="post">
+            <!-- Dropdown for Category -->
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                {% for category in data.categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Dropdown for Points -->
+            <label for="points">Points:</label>
+            <select id="points" name="points" required>
+                <option value="200">200</option>
+                <option value="400">400</option>
+                <option value="600">600</option>
+                <option value="800">800</option>
+                <option value="1000">1000</option>
+            </select>
+
+            <!-- Dropdown for Type -->
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+                <option value="text">Text</option>
+                <option value="image">Image</option>
+                <option value="video">Video</option>
+                <option value="sound">Sound</option>
+            </select>
+
+            <!-- Input for Content -->
+            <label for="content">Content:</label>
+            <input type="text" id="content" name="content" required>
+
+            <!-- Submit Button -->
+            <button type="submit">Uppdatera Fråga</button>
+        </form>
+
+        <!-- Confirmation message -->
+        {% if flash_message %}
+            <div class="flash-message success">
+                {{ flash_message }}
+            </div>
+        {% endif %}
+
+        <!-- Back button below the form -->
+        <a href="/" class="back-button">Back to Game</a>
+    </div>
+</body>
+</html>

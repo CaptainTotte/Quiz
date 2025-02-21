@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #081653; /* Bakgrundsfärg */
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: separate; /* Möjliggör mellanrum mellan celler */
+    border-spacing: 16px; /* 16px mellanrum mellan celler */
+    table-layout: fixed; /* Säkerställer att alla celler har samma bredd */
+}
+
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+    background-color: white; /* Vit bakgrund för boxarna */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mjuk skugga */
+    border-radius: 10px; /* Rundade hörn */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animering vid hover */
+    width: 150px; /* Bredd på boxarna */
+    height: 120px; /* Höjd på boxarna */
+    padding: 0; /* Ta bort padding för att säkerställa enhetlig storlek */
+    overflow: hidden; /* Förhindra att texten flyter utanför boxen */
+}
+
+/* Stil för kategorieraden (header) */
+th {
+    font-size: 1em; /* Mindre font-storlek för kategorier */
+    font-weight: bold; /* Fet text */
+    background-color: #7BBF42; /* Grön bakgrund för kategoriboxarna */
+    color: #FFFFFF; /* Vit textfärg */
+    margin-bottom: 32px; /* 32px marginal under kategorieraden */
+    padding: 10px; /* Mindre padding för att ge mer utrymme för text */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Starkare skugga för header */
+    width: 150px; /* Samma bredd som andra boxar */
+    height: auto; /* Höjden anpassas efter innehållet */
+    text-transform: uppercase; /* Gör all text till versaler */
+    display: table-cell; /* Använd standard tabell-cell-layout */
+    vertical-align: middle; /* Centrera texten vertikalt */
+}
+
+/* Centrera innehållet i boxarna */
+td div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ta bort hover-effekt för kategorier */
+th:hover {
+    transform: none; /* Ingen förflyttning vid hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Behåll samma skugga */
+}
+
+td:hover {
+    transform: translateY(-5px); /* Lyft boxen vid hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Starkare skugga vid hover */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    width: 90%;
+    height: 90%;
+    max-width: 1000px;
+    max-height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Skugga för modal */
+}
+
+#question-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#question-content img,
+#question-content iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ytterligare CSS för att dölja YouTube-titlar och kontroller */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.youtube-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%; /* Justera höjden för att täcka titelområdet */
+    background: rgb(0, 0, 0); /* Genomskinlig svart overlay */
+    pointer-events: none; /* Se till att klick går igenom till iframe */
+    z-index: 1; /* Placera overlay ovanpå iframe */
+}
+
+iframe {
+    border: none; /* Ta bort iframe-ram */
+    width: 100%;
+    height: 100%;
+}
