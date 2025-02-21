@@ -10,13 +10,13 @@
         "200": [
             {
                 "category": "Karakt\u00e4rer",
-                "type": "video",
-                "content": "https://www.youtube.com/embed/sxTNACldK3Y"
+                "type": "sound",
+                "content": "https://www.cs.uic.edu/~i101/SoundFiles/PinkPanther60.wav"
             },
             {
                 "category": "Gaming Historia",
-                "type": "text",
-                "content": "Vilket \u00e5r sl\u00e4ptes 'Pong'?"
+                "type": "sound",
+                "content": "https://www.cs.uic.edu/~i101/SoundFiles/preamble10.wav"
             },
             {
                 "category": "Konsoler",

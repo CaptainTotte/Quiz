@@ -75,11 +75,9 @@ async function showQuestion(category, point, clickedCell) {
                     </div>
                 `;
             } else if (question.type === 'video') {
-                // Check if the video is from YouTube or Vimeo
                 let videoUrl = question.content;
                 if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
-                    // YouTube video: Strip title and controls
-                    videoUrl = videoUrl.replace(/(\?|&)list=.*/, ''); // Remove playlist parameter
+                    videoUrl = videoUrl.replace(/(\?|&)list=.*/, '');
                     videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'autoplay=1&controls=0&modestbranding=1&rel=0&disablekb=1';
                     questionContent.innerHTML = `
                         <div class="video-container">
@@ -88,11 +86,17 @@ async function showQuestion(category, point, clickedCell) {
                         </div>
                     `;
                 } else if (videoUrl.includes('vimeo.com')) {
-                    // Vimeo video: Strip title and controls
-                    videoUrl = videoUrl.replace(/(\?|&)title=.*/, ''); // Remove existing title parameter
+                    videoUrl = videoUrl.replace(/(\?|&)title=.*/, '');
                     videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'autoplay=1&title=0&byline=0&portrait=0';
                     questionContent.innerHTML = `<iframe src="${videoUrl}" title="Video Question" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                 }
+            } else if (question.type === 'sound') {
+                questionContent.innerHTML = `
+                    <audio controls autoplay>
+                        <source src="${question.content}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                `;
             }
         }, { once: true });
     }
@@ -104,7 +108,6 @@ resetButton.addEventListener('click', () => {
     cells.forEach(cell => {
         cell.classList.remove('hidden'); // Remove the hidden class
         cell.classList.add('pop-effect'); // Add pop effect
-        // Remove the pop effect after the animation ends
         cell.addEventListener('animationend', () => {
             cell.classList.remove('pop-effect');
         }, { once: true });

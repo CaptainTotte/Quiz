@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeopardy Game</title>
+    <title>The Game</title>
     <link rel="stylesheet" href="/static/styles.css"> <!-- Link to the main CSS file -->
 </head>
 <body>
     <table id="game-board"></table>
 
-    <!-- Reset Button -->
-    <button id="reset-button" class="reset-button">Återställ alla kort</button>
+    <!-- Buttons -->
+    <div class="buttons-container">
+        <button id="reset-button" class="reset-button">Återställ alla kort</button>
+        <a href="/admin" id="admin-button" class="admin-button">Admin</a>
+    </div>
 
     <!-- Modal -->
     <div id="modal" class="modal">

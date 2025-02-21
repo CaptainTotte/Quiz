@@ -63,15 +63,21 @@ td:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Starkare skugga vid hover */
 }
 
-/* Reset Button */
-.reset-button {
+/* Buttons container */
+.buttons-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Reset Button */
+.reset-button {
     padding: 10px 20px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: #7BBF42; /* Grön bakgrund */
+    background-color: #7BBF42; /* Green background */
     color: white;
     border: none;
     border-radius: 5px;
@@ -81,7 +87,27 @@ td:hover {
 }
 
 .reset-button:hover {
-    background-color: #6aa83a; /* Mörkare grön vid hover */
+    background-color: #6aa83a; /* Darker green on hover */
+}
+
+/* Admin Button */
+.admin-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #081653; /* Dark blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from link */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+    display: inline-block; /* Make it look like a button */
+}
+
+.admin-button:hover {
+    background-color: #0a1f6b; /* Darker blue on hover */
 }
 
 /* Hidden class for cards */
@@ -98,7 +124,7 @@ td:hover {
     }
     100% {
         transform: scale(5) translate(0, 0); /* Zoom in and move to center */
-        opacity: 0.9; /* Mindre transparent (ändrat från 0 till 0.5) */
+        opacity: 0.5; /* Mindre transparent (ändrat från 0 till 0.5) */
     }
 }
 
