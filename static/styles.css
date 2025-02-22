@@ -212,7 +212,7 @@ td:hover {
     left: 0;
     width: 100%;
     height: 15%; /* Justera höjden för att täcka titelområdet */
-    background: rgba(0, 0, 0, 0.8); /* Genomskinlig svart overlay */
+    background: rgb(0, 0, 0); /* Genomskinlig svart overlay */
     pointer-events: none; /* Se till att klick går igenom till iframe */
     z-index: 1; /* Placera overlay ovanpå iframe */
 }
