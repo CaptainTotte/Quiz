@@ -2,6 +2,24 @@
 
 Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz game inspired by the popular TV show Jeopardy. Players can select categories and point values to answer questions, and the game includes features like a reset button, an admin panel for managing questions, and interactive animations.
 
+## Features
+
+- **Interactive Game Board**: Players can click on categories and point values to reveal questions.
+- **Question Types**: Supports text, image, video, and audio questions.
+- **Admin Panel**: Allows admins to add, update, and delete questions.
+- **Responsive Design**: Works on both desktop and mobile devices.
+- **Animations**: Smooth animations for question transitions and button effects.
+
+## Technologies Used
+
+- **Frontend**:
+  - HTML, CSS, JavaScript
+  - [FastAPI](https://fastapi.tiangolo.com/) (for serving static files and handling API requests)
+- **Backend**:
+  - Python (FastAPI)
+- **Data Storage**:
+  - JSON file (`questions.json`) for storing questions and categories.
+
 ## How to Clone and Run
 
 ### Clone the Repository
