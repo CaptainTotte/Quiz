@@ -50,7 +50,11 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
    - Open your browser and navigate to `http://127.0.0.1:8000`.
    - The admin panel can be accessed at `http://127.0.0.1:8000/admin`.
 
-### Docker Setup (Optional)
+### Docker Setup
+
+You can run the application using Docker for a containerized deployment.
+
+#### Using Dockerfile
 
 1. **Build the Docker Image**:
    ```bash
@@ -65,6 +69,59 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
 3. **Access the Application**:
    - Open your browser and navigate to `http://localhost:8000`.
 
+#### Using Docker Compose
+
+1. **Start the Application with Docker Compose**:
+   ```bash
+   docker-compose up
+   ```
+
+2. **Access the Application**:
+   - Open your browser and navigate to `http://localhost:8000`.
+
+### Dockerfile
+
+The `Dockerfile` is used to build the Docker image for the application:
+
+```dockerfile
+# Use an official Python-based image
+FROM python:3.9-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy requirements.txt and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the project files
+COPY . .
+
+# Expose the port FastAPI runs on (default is 8000)
+EXPOSE 8000
+
+# Run the FastAPI application when the container starts
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+### Docker Compose
+
+The `docker-compose.yaml` file simplifies running the application with Docker:
+
+```yaml
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"  # Map port 8000 on the host to port 8000 in the container
+    volumes:
+      - .:/app       # Mount the project directory for live updates during development
+    environment:
+      - APP_ENV=development  # Environment variables (can be customized)
+```
+
 ## File Structure
 
 ```
@@ -78,6 +135,8 @@ jeopardy-quiz-game/
 ├── main.py               # FastAPI application
 ├── questions.json        # JSON file for storing questions
 ├── requirements.txt      # Python dependencies
+├── Dockerfile            # Dockerfile for containerized deployment
+├── docker-compose.yaml   # Docker Compose configuration
 └── README.md             # This file
 ```
 
