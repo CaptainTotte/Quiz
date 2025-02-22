@@ -31,8 +31,8 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/jeopardy-quiz-game.git
-   cd jeopardy-quiz-game
+   git clone https://github.com/CaptainTotte/Quiz.git
+   cd Quiz
    ```
 
 2. **Install Dependencies**:
@@ -58,12 +58,12 @@ You can run the application using Docker for a containerized deployment.
 
 1. **Build the Docker Image**:
    ```bash
-   docker build -t jeopardy-quiz-game .
+   docker build -t quiz .
    ```
 
 2. **Run the Docker Container**:
    ```bash
-   docker run -d -p 8000:8000 jeopardy-quiz-game
+   docker run -d -p 8000:8000 quiz
    ```
 
 3. **Access the Application**:
