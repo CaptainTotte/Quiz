@@ -1,146 +1,209 @@
-/* General styles */
 body {
+    font-family: Arial, sans-serif;
+    background-color: #081653; /* Bakgrundsfärg */
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #081653;
-    color: white;
 }
 
-/* Game board styles */
-#game-board {
-    width: 100%;
-    border-collapse: collapse;
+table {
+    width: 80%;
     margin: 20px auto;
+    border-collapse: separate; /* Möjliggör mellanrum mellan celler */
+    border-spacing: 16px; /* 16px mellanrum mellan celler */
+    table-layout: fixed; /* Säkerställer att alla celler har samma bredd */
 }
 
-#game-board th, #game-board td {
-    border: 2px solid white;
-    padding: 20px;
+th, td {
+    border: 1px solid black;
     text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: white; /* Vit bakgrund för boxarna */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mjuk skugga */
+    border-radius: 10px; /* Rundade hörn */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animering vid hover */
+    width: 150px; /* Bredd på boxarna */
+    height: 120px; /* Höjd på boxarna */
+    padding: 0; /* Ta bort padding för att säkerställa enhetlig storlek */
+    overflow: hidden; /* Förhindra att texten flyter utanför boxen */
 }
 
-#game-board th {
-    background-color: #007BFF;
+/* Stil för kategorieraden (header) */
+th {
+    font-size: 1em; /* Mindre font-storlek för kategorier */
+    font-weight: bold; /* Fet text */
+    background-color: #7BBF42; /* Grön bakgrund för kategoriboxarna */
+    color: #FFFFFF; /* Vit textfärg */
+    margin-bottom: 32px; /* 32px marginal under kategorieraden */
+    padding: 10px; /* Mindre padding för att ge mer utrymme för text */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Starkare skugga för header */
+    width: 150px; /* Samma bredd som andra boxar */
+    height: auto; /* Höjden anpassas efter innehållet */
+    text-transform: uppercase; /* Gör all text till versaler */
+    display: table-cell; /* Använd standard tabell-cell-layout */
+    vertical-align: middle; /* Centrera texten vertikalt */
+}
+
+/* Större text och centrering för poängboxarna */
+td {
+    font-size: 2.5rem; /* Stor textstorlek */
+    font-weight: bold; /* Fet text */
+    display: table-cell; /* Behåll tabell-cell-layout */
+    vertical-align: middle; /* Centrera texten vertikalt */
+    text-align: center; /* Centrera texten horisontellt */
+}
+
+/* Ta bort hover-effekt för kategorier */
+th:hover {
+    transform: none; /* Ingen förflyttning vid hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Behåll samma skugga */
+}
+
+td:hover {
+    transform: translateY(-5px); /* Lyft boxen vid hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Starkare skugga vid hover */
+}
+
+/* Buttons container */
+.buttons-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Reset Button */
+.reset-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #7BBF42; /* Green background */
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
 }
 
-#game-board td:hover {
-    background-color: #0056b3;
+.reset-button:hover {
+    background-color: #6aa83a; /* Darker green on hover */
 }
 
-/* Modal styles */
-#modal {
+/* Admin Button */
+.admin-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #007BFF; /* Dark blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from link */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+}
+
+.admin-button:hover {
+    background-color: #0a1f6b; /* Darker blue on hover */
+}
+
+/* Hidden class for cards */
+.hidden {
+    visibility: hidden;
+    pointer-events: none; /* Inaktivera klick på dolda kort */
+}
+
+/* Zoom-in animation for cards */
+@keyframes zoomIn {
+    0% {
+        transform: scale(1) translate(var(--start-x), var(--start-y));
+        opacity: 1;
+    }
+    100% {
+        transform: scale(5) translate(0, 0); /* Zoom in and move to center */
+        opacity: 0.5; /* Mindre transparent (ändrat från 0 till 0.5) */
+    }
+}
+
+.zoom-in {
+    animation: zoomIn 0.4s ease-in-out forwards; /* Snabbare och smidigare animation */
+    position: fixed; /* Fix the card position during animation */
+    z-index: 1000; /* Ensure it appears above other elements */
+    pointer-events: none; /* Disable clicks during animation */
+    top: var(--start-top); /* Start from the clicked card's position */
+    left: var(--start-left); /* Start from the clicked card's position */
+    transform-origin: center; /* Zoom from the center of the card */
+}
+
+/* Pop animation for reset */
+@keyframes pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.pop-effect {
+    animation: pop 0.5s ease-out;
+}
+
+.modal {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .modal-content {
-    background-color: #081653;
-    padding: 20px;
+    background: white;
     border-radius: 10px;
-    max-width: 90%;
-    max-height: 90%;
-    overflow: auto;
-    text-align: center;
-}
-
-/* Buttons container */
-.buttons-container {
+    width: 90%;
+    height: 90%;
+    max-width: 1000px;
+    max-height: 800px;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Skugga för modal */
 }
 
-.reset-button, .admin-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-    transition: background-color 0.3s ease;
+#question-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.reset-button {
-    background-color: #dc3545;
+#question-content img,
+#question-content iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.reset-button:hover {
-    background-color: #c82333;
-}
-
-.admin-button {
-    background-color: #007BFF; /* Updated background color for the admin button */
-}
-
-.admin-button:hover {
-    background-color: #0056b3; /* Darker shade for hover effect */
-}
-
-/* Animations */
-@keyframes zoom-in {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.2);
-    }
-}
-
-@keyframes pop-effect {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.zoom-in {
-    animation: zoom-in 0.3s forwards;
-}
-
-.pop-effect {
-    animation: pop-effect 0.3s forwards;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-/* Video container styles */
+/* Ytterligare CSS för att dölja YouTube-titlar och kontroller */
 .video-container {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
-}
-
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 .youtube-overlay {
@@ -148,31 +211,14 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
+    height: 15%; /* Justera höjden för att täcka titelområdet */
+    background: rgba(0, 0, 0, 0.8); /* Genomskinlig svart overlay */
+    pointer-events: none; /* Se till att klick går igenom till iframe */
+    z-index: 1; /* Placera overlay ovanpå iframe */
 }
 
-/* Audio styles */
-audio {
+iframe {
+    border: none; /* Ta bort iframe-ram */
     width: 100%;
-    margin-top: 20px;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    #game-board th, #game-board td {
-        padding: 10px;
-        font-size: 1.2rem;
-    }
-
-    .buttons-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .reset-button, .admin-button {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+    height: 100%;
 }

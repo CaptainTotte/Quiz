@@ -114,9 +114,15 @@ resetButton.addEventListener('click', () => {
     });
 });
 
-// Close the modal when 'ESC' is pressed
+// Close the modal when 'ESC' is pressed or when clicking outside the modal
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
         closeModal();
     }
 });
