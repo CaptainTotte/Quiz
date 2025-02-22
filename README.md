@@ -7,7 +7,6 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
 - **Interactive Game Board**: Players can click on categories and point values to reveal questions.
 - **Question Types**: Supports text, image, video, and audio questions.
 - **Admin Panel**: Allows admins to add, update, and delete questions.
-- **Responsive Design**: Works on both desktop and mobile devices.
 - **Animations**: Smooth animations for question transitions and button effects.
 
 ## Technologies Used
