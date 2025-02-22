@@ -35,7 +35,7 @@ body {
 
 .admin-form button {
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #7BBF42; /* Updated background color for the "Uppdatera Fråga" button */
     color: white;
     border: none;
     border-radius: 4px;
@@ -43,7 +43,7 @@ body {
 }
 
 .admin-form button:hover {
-    background-color: #0056b3;
+    background-color: #5a8f32; /* Darker shade for hover effect */
 }
 
 /* Flash message styles */
