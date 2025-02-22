@@ -33,7 +33,7 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
 
 1. Start the application using Docker Compose:
    ```bash
-   docker-compose up
+   docker-compose up -d
    ```
 
 2. Access the application in your browser:
