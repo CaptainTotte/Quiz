@@ -10,6 +10,7 @@
     <div class="admin-container">
         <h1>Admin Panel</h1>
 
+        <!-- Form for updating questions -->
         <form class="admin-form" action="/admin/update" method="post">
             <!-- Dropdown for Category -->
             <label for="category">Category:</label>
@@ -44,6 +45,26 @@
 
             <!-- Submit Button -->
             <button type="submit">Uppdatera Fråga</button>
+        </form>
+
+        <!-- Form for editing categories -->
+        <form class="admin-form" action="/admin/update_category" method="post">
+            <h2>Edit Category</h2>
+
+            <!-- Dropdown for Current Category -->
+            <label for="current_category">Current Category:</label>
+            <select id="current_category" name="current_category" required>
+                {% for category in data.categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Input for New Category Name -->
+            <label for="new_category">New Category Name:</label>
+            <input type="text" id="new_category" name="new_category" required>
+
+            <!-- Submit Button -->
+            <button type="submit">Update Category</button>
         </form>
 
         <!-- Confirmation message -->

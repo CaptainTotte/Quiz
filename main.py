@@ -24,26 +24,24 @@ ADMIN_PASSWORD = "password"
 # Load the JSON file
 def load_questions():
     if os.path.exists("questions.json"):
-        with open("questions.json", "r") as file:
+        with open("questions.json", "r", encoding="utf-8") as file:
             return json.load(file)
     return {"categories": [], "questions": {}}
 
 # Save the JSON file
 def save_questions(data):
-    with open("questions.json", "w") as file:
+    with open("questions.json", "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4)
 
 # Convert YouTube URL to embed URL
 def convert_to_embed_url(url):
-    # Match regular YouTube URL (e.g., https://youtu.be/sxTNACldK3Y)
     if "youtu.be" in url:
-        video_id = url.split("/")[-1].split("?")[0]  # Extract video ID
+        video_id = url.split("/")[-1].split("?")[0]
         return f"https://www.youtube.com/embed/{video_id}"
-    # Match full YouTube URL (e.g., https://www.youtube.com/watch?v=sxTNACldK3Y)
     elif "youtube.com" in url:
-        video_id = url.split("v=")[1].split("&")[0]  # Extract video ID
+        video_id = url.split("v=")[1].split("&")[0]
         return f"https://www.youtube.com/embed/{video_id}"
-    return url  # Return the original URL if it's not a YouTube URL
+    return url
 
 # Authentication dependency
 def authenticate_admin(credentials: HTTPBasicCredentials = Depends(security)):
@@ -65,10 +63,8 @@ async def read_root():
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_panel(request: Request, username: str = Depends(authenticate_admin)):
     data = load_questions()
-    # Check for a flash message in cookies
     flash_message = request.cookies.get("flash_message", None)
     response = templates.TemplateResponse("admin.html", {"request": request, "data": data, "flash_message": flash_message})
-    # Clear the flash message after displaying it
     response.set_cookie(key="flash_message", value="", max_age=0)
     return response
 
@@ -86,10 +82,8 @@ async def update_questions(
         data["categories"].append(category)
     if points not in data["questions"]:
         data["questions"][points] = []
-    # Convert YouTube URL to embed URL if type is video
     if type == "video":
         content = convert_to_embed_url(content)
-    # Update or add the question
     question = next((q for q in data["questions"][points] if q["category"] == category), None)
     if question:
         question["type"] = type
@@ -97,7 +91,6 @@ async def update_questions(
     else:
         data["questions"][points].append({"category": category, "type": type, "content": content})
     save_questions(data)
-    # Set a flash message in cookies
     response = RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
     response.set_cookie(key="flash_message", value="Frågan har uppdaterats!")
     return response
@@ -114,6 +107,27 @@ async def delete_question(
         data["questions"][points] = [q for q in data["questions"][points] if q["category"] != category]
         save_questions(data)
     return RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
+
+# Endpoint to update categories
+@app.post("/admin/update_category")
+async def update_category(
+    current_category: str = Form(...),
+    new_category: str = Form(...),
+    username: str = Depends(authenticate_admin),
+):
+    data = load_questions()
+    if current_category in data["categories"]:
+        data["categories"] = [new_category if cat == current_category else cat for cat in data["categories"]]
+        for points in data["questions"]:
+            for question in data["questions"][points]:
+                if question["category"] == current_category:
+                    question["category"] = new_category
+        save_questions(data)
+        response = RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
+        response.set_cookie(key="flash_message", value=f"Kategori '{current_category}' har uppdaterats till '{new_category}'.")
+        return response
+    else:
+        raise HTTPException(status_code=400, detail="Kategorin finns inte.")
 
 # Existing endpoints
 @app.get("/categories")
