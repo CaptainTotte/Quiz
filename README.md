@@ -5,8 +5,8 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
 ## Features
 
 - **Interactive Game Board**: Players can click on categories and point values to reveal questions.
-- **Question Types**: Supports text, image, video, and audio questions.
-- **Admin Panel**: Allows admins to add, update, and delete questions.
+- **Question Types**: Supports text, image, video, and audio questions. All by external URL's.
+- **Admin Panel**: Allows admins to add, update, and delete questions & categories.
 - **Animations**: Smooth animations for question transitions and button effects.
 
 ## Technologies Used
@@ -29,16 +29,21 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
    cd Quiz
    ```
 
+### Configs
+
+- You will find the admin username and password in main.py if you wish to change it. (Recommended)
+- Port is easiest changed within the docker compose file.
+
 ### Run with Docker Compose
 
 1. Start the application using Docker Compose:
    ```bash
    docker-compose up -d
-   ```
+   ```   
 
-2. Access the application in your browser:
+3. Access the application in your browser:
    - Open `http://localhost:8000` to play the game.
-   - Open `http://localhost:8000/admin` to access the admin panel (username: `admin`, password: `password`).
+   - To access the admin panel (username: `admin`, password: `password`).
 
 ---
 
