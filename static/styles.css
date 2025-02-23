@@ -7,19 +7,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Align content to the top */
-    min-height: 100vh; /* Use min-height instead of height to allow scrolling */
-    overflow: auto; /* Allow scrolling if content overflows */
+    justify-content: center; /* Centrera innehållet vertikalt */
+    min-height: 100vh; /* Använd min-height för att fylla skärmens höjd */
+    overflow: auto; /* Tillåt scroll om innehållet överstiger skärmens höjd */
 }
 
 /* Table Styles */
 table {
-    width: calc(100% - 32px); /* Full width minus 16px margin on each side */
-    margin: 16px; /* 16px margin around the table */
-    margin-bottom: 20px; /* Add some space below the table */
+    width: calc(100% - 32px); /* Full bredd minus 16px marginal på varje sida */
+    margin: 16px; /* 16px marginal runt tabellen */
+    margin-bottom: 20px; /* Ytterligare marginal under tabellen */
     border-collapse: separate; /* Möjliggör mellanrum mellan celler */
-    border-spacing: 8px; /* Reduce spacing between cells for smaller screens */
+    border-spacing: 8px; /* Minska mellanrummet mellan celler för mindre skärmar */
     table-layout: fixed; /* Säkerställer att alla celler har samma bredd */
+    flex-grow: 1; /* Låt tabellen expandera för att fylla tillgängligt utrymme */
 }
 
 /* Header and Cell Styles */
@@ -31,29 +32,29 @@ th, td {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mjuk skugga */
     border-radius: 10px; /* Rundade hörn */
     transition: transform 0.2s, box-shadow 0.2s; /* Animering vid hover */
-    width: 100px; /* Reduce width for smaller screens */
-    height: 120px; /* Reduce height for smaller screens */
+    width: 150px; /* Bredd på boxarna */
+    height: 200px; /* Höjd på boxarna */
     padding: 0; /* Ta bort padding för att säkerställa enhetlig storlek */
     overflow: hidden; /* Förhindra att texten flyter utanför boxen */
 }
 
 /* Category Row (Header) Styles */
 th {
-    font-size: 1.2em; /* Reduce font size for smaller screens */
+    font-size: 1.5em; /* Större textstorlek för bättre synlighet */
     font-weight: bold; /* Fet text */
-    background: linear-gradient(135deg, #7BBF42, #5a8f32); /* Gradient background */
+    background: linear-gradient(135deg, #7BBF42, #5a8f32); /* Gradientbakgrund */
     color: #FFFFFF; /* Vit textfärg */
-    padding: 10px; /* Reduce padding for smaller screens */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+    padding: 15px; /* Lite större padding för bättre avstånd */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Starkare skugga för djup */
     text-transform: uppercase; /* Gör all text till versaler */
     vertical-align: middle; /* Centrera texten vertikalt */
-    border: 2px solid #FFFFFF; /* White border for contrast */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+    border: 2px solid #FFFFFF; /* Vit ram för kontrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textskugga för bättre läsbarhet */
 }
 
 /* Points Box Styles */
 td {
-    font-size: 1.5rem; /* Reduce font size for smaller screens */
+    font-size: 2.5rem; /* Stor textstorlek */
     font-weight: bold; /* Fet text */
     vertical-align: middle; /* Centrera texten vertikalt */
     text-align: center; /* Centrera texten horisontellt */
@@ -61,8 +62,8 @@ td {
 
 /* Hover Effects */
 th:hover {
-    transform: translateY(0px); /* Slight lift on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+    transform: translateY(0px); /* Lyft boxen vid hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Starkare skugga vid hover */
 }
 
 td:hover {
@@ -73,8 +74,8 @@ td:hover {
 /* Buttons Container */
 .buttons-container {
     display: flex;
-    gap: 10px; /* Space between buttons */
-    margin-bottom: 20px; /* Add some space below the buttons */
+    gap: 10px; /* Avstånd mellan knapparna */
+    margin-bottom: 20px; /* Marginal under knapparna */
 }
 
 /* Reset Button */
@@ -82,7 +83,7 @@ td:hover {
     padding: 10px 20px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: #7BBF42; /* Green background */
+    background-color: #7BBF42; /* Grön bakgrund */
     color: white;
     border: none;
     border-radius: 5px;
@@ -92,7 +93,7 @@ td:hover {
 }
 
 .reset-button:hover {
-    background-color: #6aa83a; /* Darker green on hover */
+    background-color: #6aa83a; /* Mörkare grön vid hover */
 }
 
 /* Admin Button */
@@ -100,18 +101,18 @@ td:hover {
     padding: 10px 20px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: #007BFF; /* Dark blue background */
+    background-color: #007BFF; /* Mörkblå bakgrund */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none; /* Remove underline from link */
+    text-decoration: none; /* Ta bort understreck från länk */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s;
 }
 
 .admin-button:hover {
-    background-color: #0a1f6b; /* Darker blue on hover */
+    background-color: #0a1f6b; /* Mörkare blå vid hover */
 }
 
 /* Hidden Class for Cards */
@@ -127,19 +128,19 @@ td:hover {
         opacity: 1;
     }
     100% {
-        transform: scale(5) translate(0, 0); /* Zoom in and move to center */
+        transform: scale(5) translate(0, 0); /* Zooma in och flytta till mitten */
         opacity: 0.5; /* Mindre transparent (ändrat från 0 till 0.5) */
     }
 }
 
 .zoom-in {
     animation: zoomIn 0.4s ease-in-out forwards; /* Snabbare och smidigare animation */
-    position: fixed; /* Fix the card position during animation */
-    z-index: 1000; /* Ensure it appears above other elements */
-    pointer-events: none; /* Disable clicks during animation */
-    top: var(--start-top); /* Start from the clicked card's position */
-    left: var(--start-left); /* Start from the clicked card's position */
-    transform-origin: center; /* Zoom from the center of the card */
+    position: fixed; /* Fixera kortets position under animationen */
+    z-index: 1000; /* Se till att det visas ovanpå andra element */
+    pointer-events: none; /* Inaktivera klick under animationen */
+    top: var(--start-top); /* Starta från det klickade kortets position */
+    left: var(--start-left); /* Starta från det klickade kortets position */
+    transform-origin: center; /* Zooma från kortets mittpunkt */
 }
 
 /* Pop Animation for Reset */
@@ -232,32 +233,32 @@ iframe {
 /* Responsive Design for Smaller Screens */
 @media (max-width: 768px) {
     table {
-        width: calc(100% - 16px); /* Reduce margin for smaller screens */
-        margin: 8px; /* Reduce margin for smaller screens */
-        margin-bottom: 20px; /* Add some space below the table */
-        border-spacing: 4px; /* Reduce spacing between cells */
+        width: calc(100% - 16px); /* Minska marginalen för mindre skärmar */
+        margin: 8px; /* Minska marginalen för mindre skärmar */
+        margin-bottom: 20px; /* Ytterligare marginal under tabellen */
+        border-spacing: 4px; /* Minska mellanrummet mellan celler */
     }
 
     th, td {
-        width: 80px; /* Further reduce width for smaller screens */
-        height: 100px; /* Further reduce height for smaller screens */
+        width: 80px; /* Ytterligare minska bredden för mindre skärmar */
+        height: 100px; /* Ytterligare minska höjden för mindre skärmar */
     }
 
     th {
-        font-size: 1em; /* Reduce font size for smaller screens */
-        padding: 8px; /* Reduce padding for smaller screens */
+        font-size: 1em; /* Minska textstorleken för mindre skärmar */
+        padding: 8px; /* Minska padding för mindre skärmar */
     }
 
     td {
-        font-size: 1.2rem; /* Reduce font size for smaller screens */
+        font-size: 1.2rem; /* Minska textstorleken för mindre skärmar */
     }
 
     .buttons-container {
-        margin-bottom: 20px; /* Add some space below the buttons */
+        margin-bottom: 20px; /* Ytterligare marginal under knapparna */
     }
 
     .reset-button, .admin-button {
-        padding: 8px 16px; /* Reduce padding for smaller screens */
-        font-size: 0.9rem; /* Reduce font size for smaller screens */
+        padding: 8px 16px; /* Minska padding för mindre skärmar */
+        font-size: 0.9rem; /* Minska textstorleken för mindre skärmar */
     }
 }
