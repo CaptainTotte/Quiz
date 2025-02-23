@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #081653; /* Bakgrundsfärg */
@@ -6,21 +7,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevent scrolling */
+    justify-content: flex-start; /* Align content to the top */
+    min-height: 100vh; /* Use min-height instead of height to allow scrolling */
+    overflow: auto; /* Allow scrolling if content overflows */
 }
 
+/* Table Styles */
 table {
-    width: calc(100% - 64px); /* Full width minus 32px margin on each side */
-    height: calc(100% - 64px); /* Full height minus 32px margin on each side */
-    margin: 32px; /* 32px margin around the table */
-    margin-bottom: 64px;
+    width: calc(100% - 32px); /* Full width minus 16px margin on each side */
+    margin: 16px; /* 16px margin around the table */
+    margin-bottom: 20px; /* Add some space below the table */
     border-collapse: separate; /* Möjliggör mellanrum mellan celler */
-    border-spacing: 16px; /* 16px mellanrum mellan celler */
+    border-spacing: 8px; /* Reduce spacing between cells for smaller screens */
     table-layout: fixed; /* Säkerställer att alla celler har samma bredd */
 }
 
+/* Header and Cell Styles */
 th, td {
     border: 1px solid black;
     text-align: center;
@@ -29,41 +31,35 @@ th, td {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mjuk skugga */
     border-radius: 10px; /* Rundade hörn */
     transition: transform 0.2s, box-shadow 0.2s; /* Animering vid hover */
-    width: 150px; /* Bredd på boxarna */
-    height: 200px; /* Höjd på boxarna */
+    width: 100px; /* Reduce width for smaller screens */
+    height: 120px; /* Reduce height for smaller screens */
     padding: 0; /* Ta bort padding för att säkerställa enhetlig storlek */
     overflow: hidden; /* Förhindra att texten flyter utanför boxen */
 }
 
-/* Stil för kategorieraden (header) */
+/* Category Row (Header) Styles */
 th {
-    font-size: 2em; /* Larger font size for better visibility */
+    font-size: 1.2em; /* Reduce font size for smaller screens */
     font-weight: bold; /* Fet text */
     background: linear-gradient(135deg, #7BBF42, #5a8f32); /* Gradient background */
     color: #FFFFFF; /* Vit textfärg */
-    margin-bottom: 32px; /* 32px marginal under kategorieraden */
-    padding: 15px; /* Slightly larger padding for better spacing */
+    padding: 10px; /* Reduce padding for smaller screens */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
-    width: 150px; /* Samma bredd som andra boxar */
-    height: auto; /* Höjden anpassas efter innehållet */
     text-transform: uppercase; /* Gör all text till versaler */
-    display: table-cell; /* Använd standard tabell-cell-layout */
     vertical-align: middle; /* Centrera texten vertikalt */
     border: 2px solid #FFFFFF; /* White border for contrast */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
-
 }
 
-/* Större text och centrering för poängboxarna */
+/* Points Box Styles */
 td {
-    font-size: 2.5rem; /* Stor textstorlek */
+    font-size: 1.5rem; /* Reduce font size for smaller screens */
     font-weight: bold; /* Fet text */
-    display: table-cell; /* Behåll tabell-cell-layout */
     vertical-align: middle; /* Centrera texten vertikalt */
     text-align: center; /* Centrera texten horisontellt */
 }
 
-/* Ta bort hover-effekt för kategorier */
+/* Hover Effects */
 th:hover {
     transform: translateY(0px); /* Slight lift on hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
@@ -74,13 +70,11 @@ td:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Starkare skugga vid hover */
 }
 
-/* Buttons container */
+/* Buttons Container */
 .buttons-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
     display: flex;
     gap: 10px; /* Space between buttons */
+    margin-bottom: 20px; /* Add some space below the buttons */
 }
 
 /* Reset Button */
@@ -120,13 +114,13 @@ td:hover {
     background-color: #0a1f6b; /* Darker blue on hover */
 }
 
-/* Hidden class for cards */
+/* Hidden Class for Cards */
 .hidden {
     visibility: hidden;
     pointer-events: none; /* Inaktivera klick på dolda kort */
 }
 
-/* Zoom-in animation for cards */
+/* Zoom-in Animation for Cards */
 @keyframes zoomIn {
     0% {
         transform: scale(1) translate(var(--start-x), var(--start-y));
@@ -148,7 +142,7 @@ td:hover {
     transform-origin: center; /* Zoom from the center of the card */
 }
 
-/* Pop animation for reset */
+/* Pop Animation for Reset */
 @keyframes pop {
     0% {
         transform: scale(0);
@@ -168,6 +162,7 @@ td:hover {
     animation: pop 0.5s ease-out;
 }
 
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -209,7 +204,7 @@ td:hover {
     object-fit: cover;
 }
 
-/* Ytterligare CSS för att dölja YouTube-titlar och kontroller */
+/* Video Container Styles */
 .video-container {
     position: relative;
     width: 100%;
@@ -232,4 +227,37 @@ iframe {
     border: none; /* Ta bort iframe-ram */
     width: 100%;
     height: 100%;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    table {
+        width: calc(100% - 16px); /* Reduce margin for smaller screens */
+        margin: 8px; /* Reduce margin for smaller screens */
+        margin-bottom: 20px; /* Add some space below the table */
+        border-spacing: 4px; /* Reduce spacing between cells */
+    }
+
+    th, td {
+        width: 80px; /* Further reduce width for smaller screens */
+        height: 100px; /* Further reduce height for smaller screens */
+    }
+
+    th {
+        font-size: 1em; /* Reduce font size for smaller screens */
+        padding: 8px; /* Reduce padding for smaller screens */
+    }
+
+    td {
+        font-size: 1.2rem; /* Reduce font size for smaller screens */
+    }
+
+    .buttons-container {
+        margin-bottom: 20px; /* Add some space below the buttons */
+    }
+
+    .reset-button, .admin-button {
+        padding: 8px 16px; /* Reduce padding for smaller screens */
+        font-size: 0.9rem; /* Reduce font size for smaller screens */
+    }
 }
