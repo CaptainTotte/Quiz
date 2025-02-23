@@ -145,3 +145,35 @@ body {
 .back-button:hover {
     background-color: #0056b3;
 }
+
+/* Summary Box Styles */
+.summary-box {
+    background-color: white; /* White background */
+    color: black; /* Black text */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Space below the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.summary-box h2 {
+    margin-top: 0; /* Remove top margin for the heading */
+    font-size: 1.5em; /* Larger font size for the heading */
+    color: #081653; /* Dark blue color for the heading */
+}
+
+.summary-box ul {
+    margin: 0; /* Remove default margin */
+    padding-left: 20px; /* Add some padding for the list */
+}
+
+.summary-box li {
+    margin-bottom: 10px; /* Space between list items */
+}
+
+.summary-box code {
+    background-color: #f5f5f5; /* Light gray background for code */
+    padding: 2px 4px; /* Padding for code */
+    border-radius: 4px; /* Rounded corners for code */
+    font-family: monospace; /* Monospace font for code */
+}
