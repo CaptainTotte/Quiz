@@ -10,8 +10,8 @@
         "200": [
             {
                 "category": "Karakt\u00e4rer",
-                "type": "video",
-                "content": "https://www.youtube.com/embed/sxTNACldK3Y"
+                "type": "text",
+                "content": "Test"
             },
             {
                 "category": "Gaming Historia",

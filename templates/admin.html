@@ -4,77 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="/static/admin.css"> <!-- Link to the admin-specific CSS file -->
+    <link rel="stylesheet" href="/static/admin.css?v=1.2"> <!-- Link to the admin-specific CSS file -->
 </head>
 <body>
     <div class="admin-container">
-        <h1>Admin Panel</h1>
+        <h1 class="admin-title">ADMIN PANEL</h1>
 
-        <!-- Form for updating questions -->
-        <form class="admin-form" action="/admin/update" method="post">
-            <!-- Dropdown for Category -->
-            <label for="category">Category:</label>
-            <select id="category" name="category" required>
-                {% for category in data.categories %}
-                    <option value="{{ category }}">{{ category }}</option>
-                {% endfor %}
-            </select>
+        <div class="form-container">
+            <!-- Form for updating questions -->
+            <form class="admin-form" action="/admin/update" method="post">
+                <h2>Edit Questions</h2>
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    {% for category in data.categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
 
-            <!-- Dropdown for Points -->
-            <label for="points">Points:</label>
-            <select id="points" name="points" required>
-                <option value="200">200</option>
-                <option value="400">400</option>
-                <option value="600">600</option>
-                <option value="800">800</option>
-                <option value="1000">1000</option>
-            </select>
+                <label for="points">Points:</label>
+                <select id="points" name="points" required>
+                    <option value="200">200</option>
+                    <option value="400">400</option>
+                    <option value="600">600</option>
+                    <option value="800">800</option>
+                    <option value="1000">1000</option>
+                </select>
 
-            <!-- Dropdown for Type -->
-            <label for="type">Type:</label>
-            <select id="type" name="type" required>
-                <option value="text">Text</option>
-                <option value="image">Image</option>
-                <option value="video">Video</option>
-                <option value="sound">Sound</option>
-            </select>
+                <label for="type">Type:</label>
+                <select id="type" name="type" required>
+                    <option value="text">Text</option>
+                    <option value="image">Image</option>
+                    <option value="video">Video</option>
+                    <option value="sound">Sound</option>
+                </select>
 
-            <!-- Input for Content -->
-            <label for="content">Content:</label>
-            <input type="text" id="content" name="content" required>
+                <label for="content">Content:
+                    <span class="tooltip">&#9432; <!-- Unicode info icon -->
+                        <span class="tooltip-text">Accepts: Text, Video, Photo & Sound</span>
+                    </span>
+                </label>
+                <div class="content-input">
+                    <input type="text" id="content" name="content" required>
+                </div>
 
-            <!-- Submit Button -->
-            <button type="submit">Uppdatera Fråga</button>
-        </form>
+                <button type="submit">Uppdatera Fråga</button>
+            </form>
 
-        <!-- Form for editing categories -->
-        <form class="admin-form" action="/admin/update_category" method="post">
-            <h2>Edit Category</h2>
+            <!-- Form for editing categories -->
+            <form class="admin-form" action="/admin/update_category" method="post">
+                <h2>Edit Category</h2>
 
-            <!-- Dropdown for Current Category -->
-            <label for="current_category">Current Category:</label>
-            <select id="current_category" name="current_category" required>
-                {% for category in data.categories %}
-                    <option value="{{ category }}">{{ category }}</option>
-                {% endfor %}
-            </select>
+                <label for="current_category">Current Category:</label>
+                <select id="current_category" name="current_category" required>
+                    {% for category in data.categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
 
-            <!-- Input for New Category Name -->
-            <label for="new_category">New Category Name:</label>
-            <input type="text" id="new_category" name="new_category" required>
+                <label for="new_category">New Category Name:</label>
+                <input type="text" id="new_category" name="new_category" required>
 
-            <!-- Submit Button -->
-            <button type="submit">Update Category</button>
-        </form>
+                <button type="submit">Update Category</button>
+            </form>
+        </div>
 
-        <!-- Confirmation message -->
         {% if flash_message %}
             <div class="flash-message success">
                 {{ flash_message }}
             </div>
         {% endif %}
 
-        <!-- Back button below the form -->
         <a href="/" class="back-button">Back to Game</a>
     </div>
 </body>

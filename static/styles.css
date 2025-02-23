@@ -51,7 +51,7 @@ th {
     vertical-align: middle; /* Centrera texten vertikalt */
     border: 2px solid #FFFFFF; /* White border for contrast */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
-    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+
 }
 
 /* Större text och centrering för poängboxarna */
@@ -65,7 +65,7 @@ td {
 
 /* Ta bort hover-effekt för kategorier */
 th:hover {
-    transform: translateY(-2px); /* Slight lift on hover */
+    transform: translateY(0px); /* Slight lift on hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
 }
 

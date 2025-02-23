@@ -40,28 +40,25 @@ async function showQuestion(category, point, clickedCell) {
     const question = questionsData.questions.find(q => q.category === category);
 
     if (question) {
-        // Calculate the position of the clicked cell relative to the viewport
-        const rect = clickedCell.getBoundingClientRect();
-        const centerX = window.innerWidth / 2 - rect.left - rect.width / 2;
-        const centerY = window.innerHeight / 2 - rect.top - rect.height / 2;
+        // Add a smooth fade-out effect to the clicked cell
+        clickedCell.style.transition = 'opacity 0.3s ease';
+        clickedCell.style.opacity = '0';
 
-        // Set custom properties for the animation
-        clickedCell.style.setProperty('--start-x', `${-centerX}px`);
-        clickedCell.style.setProperty('--start-y', `${-centerY}px`);
-        clickedCell.style.setProperty('--start-top', `${rect.top}px`);
-        clickedCell.style.setProperty('--start-left', `${rect.left}px`);
-
-        // Add zoom-in effect to the clicked cell
-        clickedCell.classList.add('zoom-in');
-
-        // Wait for the animation to finish before showing the modal
-        clickedCell.addEventListener('animationend', () => {
-            clickedCell.classList.remove('zoom-in');
+        // Wait for the fade-out animation to finish
+        setTimeout(() => {
             clickedCell.classList.add('hidden'); // Hide the cell after animation
 
-            // Show the modal and set its content
+            // Show the modal with a smooth fade-in effect
+            modal.style.opacity = '0';
             modal.style.display = 'flex';
+            modal.style.transition = 'opacity 0.3s ease';
 
+            // Trigger the fade-in effect
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+
+            // Set the modal content based on the question type
             if (question.type === 'text') {
                 questionContent.innerHTML = `
                     <div style="margin: 30px;">
@@ -98,7 +95,7 @@ async function showQuestion(category, point, clickedCell) {
                     </audio>
                 `;
             }
-        }, { once: true });
+        }, 300); // Match the duration of the fade-out animation
     }
 }
 
@@ -107,6 +104,7 @@ resetButton.addEventListener('click', () => {
     const cells = document.querySelectorAll('td');
     cells.forEach(cell => {
         cell.classList.remove('hidden'); // Remove the hidden class
+        cell.style.opacity = '1'; // Reset opacity
         cell.classList.add('pop-effect'); // Add pop effect
         cell.addEventListener('animationend', () => {
             cell.classList.remove('pop-effect');
@@ -128,8 +126,15 @@ modal.addEventListener('click', (event) => {
 });
 
 function closeModal() {
-    modal.style.display = 'none';
-    questionContent.innerHTML = ''; // Clear content on close
+    // Add a smooth fade-out effect to the modal
+    modal.style.opacity = '0';
+    modal.style.transition = 'opacity 0.3s ease';
+
+    // Wait for the fade-out animation to finish before hiding the modal
+    setTimeout(() => {
+        modal.style.display = 'none';
+        questionContent.innerHTML = ''; // Clear content on close
+    }, 300); // Match the duration of the fade-out animation
 }
 
 window.onload = loadGame; // Load game when the page loads
