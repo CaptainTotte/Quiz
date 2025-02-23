@@ -40,7 +40,7 @@ th, td {
 
 /* Category Row (Header) Styles */
 th {
-    font-size: 1.5em; /* Större textstorlek för bättre synlighet */
+    font-size: 2em; /* Större textstorlek för bättre synlighet */
     font-weight: bold; /* Fet text */
     background: linear-gradient(135deg, #7BBF42, #5a8f32); /* Gradientbakgrund */
     color: #FFFFFF; /* Vit textfärg */
