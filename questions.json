@@ -1,145 +1,145 @@
 {
     "categories": [
-        "Karakt\u00e4rer",
-        "Gaming Historia",
-        "Konsoler",
+        "Characters",
+        "Gaming History",
+        "Consoles",
         "Easter Eggs",
-        "Spelutvecklare"
+        "Game Developers"
     ],
     "questions": {
         "200": [
             {
-                "category": "Karakt\u00e4rer",
-                "type": "image",
-                "content": "https://cdn.triforcewiki.com/thumb/d/d5/Link_TLoZ_artwork.png/1200px-Link_TLoZ_artwork.png"
-            },
-            {
-                "category": "Gaming Historia",
-                "type": "sound",
-                "content": "https://www.cs.uic.edu/~i101/SoundFiles/preamble10.wav"
-            },
-            {
-                "category": "Konsoler",
+                "category": "Characters",
                 "type": "text",
-                "content": "Vilken konsol sl\u00e4ptes av Nintendo 1985?"
+                "content": "200: Test"
+            },
+            {
+                "category": "Gaming History",
+                "type": "text",
+                "content": "200: Test"
+            },
+            {
+                "category": "Consoles",
+                "type": "text",
+                "content": "200: Test"
             },
             {
                 "category": "Easter Eggs",
                 "type": "text",
-                "content": "Vad \u00e4r ett k\u00e4nt easter egg i 'Grand Theft Auto: San Andreas'?"
+                "content": "200: Test"
             },
             {
-                "category": "Spelutvecklare",
+                "category": "Game Developers",
                 "type": "text",
-                "content": "Vilket f\u00f6retag skapade 'Minecraft'?"
+                "content": "200: Test"
             }
         ],
         "400": [
             {
-                "category": "Karakt\u00e4rer",
+                "category": "Characters",
                 "type": "text",
-                "content": "Vem \u00e4r skurken i 'Super Mario'?"
+                "content": "400: Test"
             },
             {
-                "category": "Gaming Historia",
+                "category": "Gaming History",
                 "type": "text",
-                "content": "Vilket spel anses vara det f\u00f6rsta arkadspelet?"
+                "content": "400: Test"
             },
             {
-                "category": "Konsoler",
+                "category": "Consoles",
                 "type": "text",
-                "content": "Vilken konsol introducerade CD-skivor f\u00f6r spel?"
+                "content": "400: Test"
             },
             {
                 "category": "Easter Eggs",
                 "type": "text",
-                "content": "Vad \u00e4r ett k\u00e4nt easter egg i 'The Legend of Zelda: Ocarina of Time'?"
+                "content": "400: Test"
             },
             {
-                "category": "Spelutvecklare",
+                "category": "Game Developers",
                 "type": "text",
-                "content": "Vilket f\u00f6retag skapade 'The Witcher'-serien?"
+                "content": "400: Test"
             }
         ],
         "600": [
             {
-                "category": "Karakt\u00e4rer",
-                "type": "image",
-                "content": "https://novalund.se/wp-content/uploads/2019/11/logo-phonehouse.png"
+                "category": "Characters",
+                "type": "text",
+                "content": "600: Test"
             },
             {
-                "category": "Gaming Historia",
+                "category": "Gaming History",
                 "type": "text",
-                "content": "Vilket \u00e5r sl\u00e4ptes 'Tetris'?"
+                "content": "600: Test"
             },
             {
-                "category": "Konsoler",
+                "category": "Consoles",
                 "type": "text",
-                "content": "Vilken konsol var den f\u00f6rsta att ha tr\u00e5dl\u00f6sa kontroller?"
+                "content": "600: Test"
             },
             {
                 "category": "Easter Eggs",
                 "type": "text",
-                "content": "Vad \u00e4r ett k\u00e4nt easter egg i 'Halo 3'?"
+                "content": "600: Test"
             },
             {
-                "category": "Spelutvecklare",
+                "category": "Game Developers",
                 "type": "text",
-                "content": "Vilket f\u00f6retag skapade 'Dark Souls'?"
+                "content": "600: Test"
             }
         ],
         "800": [
             {
-                "category": "Karakt\u00e4rer",
+                "category": "Characters",
                 "type": "text",
-                "content": "Vem \u00e4r huvudkarakt\u00e4ren i 'Final Fantasy VII'?"
+                "content": "800: Test"
             },
             {
-                "category": "Gaming Historia",
+                "category": "Gaming History",
                 "type": "text",
-                "content": "Vilket \u00e5r sl\u00e4ptes 'Doom'?"
+                "content": "800: Test"
             },
             {
-                "category": "Konsoler",
+                "category": "Consoles",
                 "type": "text",
-                "content": "Vilken konsol var den f\u00f6rsta att st\u00f6dja 4K-uppl\u00f6sning?"
+                "content": "800: Test"
             },
             {
                 "category": "Easter Eggs",
                 "type": "text",
-                "content": "Vad \u00e4r ett k\u00e4nt easter egg i 'Portal 2'?"
+                "content": "800: Test"
             },
             {
-                "category": "Spelutvecklare",
+                "category": "Game Developers",
                 "type": "text",
-                "content": "Vilket f\u00f6retag skapade 'The Elder Scrolls'-serien?"
+                "content": "800: Test"
             }
         ],
         "1000": [
             {
-                "category": "Karakt\u00e4rer",
+                "category": "Characters",
                 "type": "text",
-                "content": "Vem \u00e4r huvudkarakt\u00e4ren i 'Half-Life'?"
+                "content": "1000: Test"
             },
             {
-                "category": "Gaming Historia",
+                "category": "Gaming History",
                 "type": "text",
-                "content": "Vilket \u00e5r sl\u00e4ptes 'World of Warcraft'?"
+                "content": "1000: Test"
             },
             {
-                "category": "Konsoler",
+                "category": "Consoles",
                 "type": "text",
-                "content": "Vilken konsol var den f\u00f6rsta att ha en inbyggd h\u00e5rddisk?"
+                "content": "1000: Test"
             },
             {
                 "category": "Easter Eggs",
                 "type": "text",
-                "content": "Vad \u00e4r ett k\u00e4nt easter egg i 'Red Dead Redemption 2'?"
+                "content": "1000: Test"
             },
             {
-                "category": "Spelutvecklare",
+                "category": "Game Developers",
                 "type": "text",
-                "content": "Vilket f\u00f6retag skapade 'Cyberpunk 2077'?"
+                "content": "1000: Test"
             }
         ]
     }
