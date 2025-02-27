@@ -19,6 +19,14 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
 - **Data Storage**:
   - JSON file (`questions.json`) for storing questions and categories.
 
+### Images
+
+[url=https://postimg.cc/dLhz207T][img]https://i.postimg.cc/dLhz207T/SCR-20250227-lvdo.png[/img][/url]
+
+[url=https://postimg.cc/rDW3HYNV][img]https://i.postimg.cc/rDW3HYNV/SCR-20250227-lvgp.png[/img][/url]
+
+[url=https://postimg.cc/XpttQ0F1][img]https://i.postimg.cc/XpttQ0F1/SCR-20250227-lwlm.png[/img][/url]
+
 ## How to Clone and Run
 
 ### Clone the Repository
