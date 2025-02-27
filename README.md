@@ -21,11 +21,9 @@ Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz gam
 
 ### Images
 
-[url=https://postimg.cc/dLhz207T][img]https://i.postimg.cc/dLhz207T/SCR-20250227-lvdo.png[/img][/url]
-
-[url=https://postimg.cc/rDW3HYNV][img]https://i.postimg.cc/rDW3HYNV/SCR-20250227-lvgp.png[/img][/url]
-
-[url=https://postimg.cc/XpttQ0F1][img]https://i.postimg.cc/XpttQ0F1/SCR-20250227-lwlm.png[/img][/url]
+![Alt text]([https://example.com/image.png](https://i.postimg.cc/dLhz207T/SCR-20250227-lvdo.png))
+![Alt text]([https://example.com/image.png](https://i.postimg.cc/rDW3HYNV/SCR-20250227-lvgp.png))
+![Alt text]([https://example.com/image.png](https://i.postimg.cc/XpttQ0F1/SCR-20250227-lwlm.png))
 
 ## How to Clone and Run
 
