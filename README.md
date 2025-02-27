@@ -2,6 +2,10 @@
 
 Welcome to the Jeopardy-Inspired Quiz Game! This project is a web-based quiz game inspired by the popular TV show Jeopardy. Players can select categories and point values to answer questions, and the game includes features like a reset button, an admin panel for managing questions, and interactive animations.
 
+## Disclaimer
+
+This application is designed for temporary or local use during events or livestreams. As such, robust security measures—such as secure username/password management and proper database integration—have not been implemented. It is intended for event-specific use only.
+
 ## Features
 
 - **Interactive Game Board**: Players can click on categories and point values to reveal questions.
