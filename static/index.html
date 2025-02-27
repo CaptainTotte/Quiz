@@ -1,27 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Game</title>
-    <link rel="stylesheet" href="/static/styles.css?v=1.1"> <!-- Link to the main CSS file -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Game</title>
+  <link rel="stylesheet" href="/static/styles.css?v=1.7"> <!-- Link to the main CSS file -->
 </head>
 <body>
+  <!-- Gameboard Container -->
+  <div class="gameboard-container">
     <table id="game-board"></table>
+  </div>
 
-    <!-- Buttons -->
-    <div class="buttons-container">
-        <button id="reset-button" class="reset-button">Reset</button>
-        <a id="admin-button" class="admin-button" href="/admin">Admin</a>
+  <!-- Buttons Container -->
+  <div class="buttons-container">
+    <button id="reset-button" class="reset-button">Reset</button>
+    <a id="admin-button" class="admin-button" href="/admin">Admin</a>
+    <button id="fullscreen-button" class="fullscreen-button">Fullscreen</button>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div id="question-content"></div>
     </div>
+  </div>
 
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div id="question-content"></div>
-        </div>
-    </div>
+  <script>
+    const fullscreenButton = document.getElementById('fullscreen-button');
 
-    <script src="/static/script.js"></script> <!-- Link to the JavaScript file -->
+    fullscreenButton.addEventListener('click', () => {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { // Safari
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { // IE11
+        elem.msRequestFullscreen();
+      }
+    });
+  </script>
+  <script src="/static/script.js"></script> <!-- Link to the JavaScript file -->
 </body>
 </html>

@@ -1,170 +1,205 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #081653; /* Bakgrundsfärg */
+/* Global Box-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* Gameboard Container: always 100vh regardless of mode */
+  .gameboard-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* Hide any overflow inside the container */
+  }
+  
+  /* General Styles for the rest of the page */
+  html, body {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #081653; /* Background color */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centrera innehållet vertikalt */
-    min-height: 100vh; /* Använd min-height för att fylla skärmens höjd */
-    overflow: auto; /* Tillåt scroll om innehållet överstiger skärmens höjd */
-}
-
-/* Table Styles */
-table {
-    width: calc(100% - 32px); /* Full bredd minus 16px marginal på varje sida */
-    margin: 16px; /* 16px marginal runt tabellen */
-    margin-bottom: 20px; /* Ytterligare marginal under tabellen */
-    border-collapse: separate; /* Möjliggör mellanrum mellan celler */
-    border-spacing: 8px; /* Minska mellanrummet mellan celler för mindre skärmar */
-    table-layout: fixed; /* Säkerställer att alla celler har samma bredd */
-    flex-grow: 1; /* Låt tabellen expandera för att fylla tillgängligt utrymme */
-}
-
-/* Header and Cell Styles */
-th, td {
-    border: 1px solid black;
-    text-align: center;
-    cursor: pointer;
-    background-color: white; /* Vit bakgrund för boxarna */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mjuk skugga */
-    border-radius: 10px; /* Rundade hörn */
-    transition: transform 0.2s, box-shadow 0.2s; /* Animering vid hover */
-    width: 150px; /* Bredd på boxarna */
-    height: 200px; /* Höjd på boxarna */
-    padding: 0; /* Ta bort padding för att säkerställa enhetlig storlek */
-    overflow: hidden; /* Förhindra att texten flyter utanför boxen */
-}
-
-/* Category Row (Header) Styles */
-th {
-    font-size: 2em; /* Större textstorlek för bättre synlighet */
-    font-weight: bold; /* Fet text */
-    background: linear-gradient(135deg, #7BBF42, #5a8f32); /* Gradientbakgrund */
-    color: #FFFFFF; /* Vit textfärg */
-    padding: 15px; /* Lite större padding för bättre avstånd */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Starkare skugga för djup */
-    text-transform: uppercase; /* Gör all text till versaler */
-    vertical-align: middle; /* Centrera texten vertikalt */
-    border: 2px solid #FFFFFF; /* Vit ram för kontrast */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textskugga för bättre läsbarhet */
-}
-
-/* Points Box Styles */
-td {
-    font-size: 2.5rem; /* Stor textstorlek */
-    font-weight: bold; /* Fet text */
-    vertical-align: middle; /* Centrera texten vertikalt */
-    text-align: center; /* Centrera texten horisontellt */
-}
-
-/* Hover Effects */
-th:hover {
-    transform: translateY(0px); /* Lyft boxen vid hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Starkare skugga vid hover */
-}
-
-td:hover {
-    transform: translateY(-5px); /* Lyft boxen vid hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Starkare skugga vid hover */
-}
-
-/* Buttons Container */
-.buttons-container {
+    justify-content: flex-start;
+    /* When content exceeds 100vh (i.e. buttons), scrolling will occur */
+    overflow: auto;
+  }
+  
+  /* (Optional) Fullscreen mode: keep same layout */
+  :fullscreen, :-webkit-full-screen {
+    overflow: auto;
     display: flex;
-    gap: 10px; /* Avstånd mellan knapparna */
-    margin-bottom: 20px; /* Marginal under knapparna */
-}
-
-/* Reset Button */
-.reset-button {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  /* Table Styles for Playfield inside the container */
+  .gameboard-container table {
+    width: 100%;
+    height: 100%;
+    margin: 0; /* Remove external margins */
+    border-collapse: separate; /* Allow spacing between cells */
+    border-spacing: 8px; /* Spacing between cells */
+    table-layout: fixed; /* Ensure equal column widths */
+  }
+  
+  /* Divide the table into 6 rows (1 header + 5 question rows) */
+  .gameboard-container tr {
+    height: calc(100% / 6);
+  }
+  
+  /* Cell Styles (Header & Points) */
+  .gameboard-container th,
+  .gameboard-container td {
+    width: calc(100% / 5); /* Assuming 5 columns */
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid black;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 0; /* No extra padding */
+    overflow: hidden;
+  }
+  
+  /* Header Row (Category) Styles */
+  .gameboard-container th {
+    font-size: 2em;
+    font-weight: bold;
+    background: linear-gradient(135deg, #7BBF42, #5a8f32);
+    color: #FFFFFF;
+    padding: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Points Cell Styles */
+  .gameboard-container td {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  /* Hover Effects for cells */
+  .gameboard-container th:hover {
+    transform: translateY(0px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+  .gameboard-container td:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Buttons Container – placed outside the gameboard-container */
+  .buttons-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Reset Button */
+  .reset-button {
     padding: 10px 20px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: #7BBF42; /* Grön bakgrund */
+    background-color: #7BBF42;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s;
-}
-
-.reset-button:hover {
-    background-color: #6aa83a; /* Mörkare grön vid hover */
-}
-
-/* Admin Button */
-.admin-button {
+  }
+  .reset-button:hover {
+    background-color: #6aa83a;
+  }
+  
+  /* Admin Button */
+  .admin-button {
     padding: 10px 20px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: #007BFF; /* Mörkblå bakgrund */
+    background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none; /* Ta bort understreck från länk */
+    text-decoration: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s;
-}
-
-.admin-button:hover {
-    background-color: #0a1f6b; /* Mörkare blå vid hover */
-}
-
-/* Hidden Class for Cards */
-.hidden {
+  }
+  .admin-button:hover {
+    background-color: #0a1f6b;
+  }
+  
+  /* Fullscreen Button styled like the Admin Button */
+  .fullscreen-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+  }
+  .fullscreen-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Hidden Class for Cards */
+  .hidden {
     visibility: hidden;
-    pointer-events: none; /* Inaktivera klick på dolda kort */
-}
-
-/* Zoom-in Animation for Cards */
-@keyframes zoomIn {
+    pointer-events: none;
+  }
+  
+  /* Zoom-in Animation for Cards */
+  @keyframes zoomIn {
     0% {
-        transform: scale(1) translate(var(--start-x), var(--start-y));
-        opacity: 1;
+      transform: scale(1) translate(var(--start-x), var(--start-y));
+      opacity: 1;
     }
     100% {
-        transform: scale(5) translate(0, 0); /* Zooma in och flytta till mitten */
-        opacity: 0.5; /* Mindre transparent (ändrat från 0 till 0.5) */
+      transform: scale(5) translate(0, 0);
+      opacity: 0.5;
     }
-}
-
-.zoom-in {
-    animation: zoomIn 0.4s ease-in-out forwards; /* Snabbare och smidigare animation */
-    position: fixed; /* Fixera kortets position under animationen */
-    z-index: 1000; /* Se till att det visas ovanpå andra element */
-    pointer-events: none; /* Inaktivera klick under animationen */
-    top: var(--start-top); /* Starta från det klickade kortets position */
-    left: var(--start-left); /* Starta från det klickade kortets position */
-    transform-origin: center; /* Zooma från kortets mittpunkt */
-}
-
-/* Pop Animation for Reset */
-@keyframes pop {
+  }
+  .zoom-in {
+    animation: zoomIn 0.4s ease-in-out forwards;
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    top: var(--start-top);
+    left: var(--start-left);
+    transform-origin: center;
+  }
+  
+  /* Pop Animation for Reset */
+  @keyframes pop {
     0% {
-        transform: scale(0);
-        opacity: 0;
+      transform: scale(0);
+      opacity: 0;
     }
     50% {
-        transform: scale(1.2);
-        opacity: 1;
+      transform: scale(1.2);
+      opacity: 1;
     }
     100% {
-        transform: scale(1);
-        opacity: 1;
+      transform: scale(1);
+      opacity: 1;
     }
-}
-
-.pop-effect {
+  }
+  .pop-effect {
     animation: pop 0.5s ease-out;
-}
-
-/* Modal Styles */
-.modal {
+  }
+  
+  /* Modal Styles */
+  .modal {
     display: none;
     position: fixed;
     top: 0;
@@ -174,9 +209,8 @@ td:hover {
     background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
+  }
+  .modal-content {
     background: white;
     border-radius: 10px;
     width: 90%;
@@ -187,78 +221,76 @@ td:hover {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Skugga för modal */
-}
-
-#question-content {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  #question-content {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#question-content img,
-#question-content iframe {
+  }
+  #question-content img,
+  #question-content iframe {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* Video Container Styles */
-.video-container {
+  }
+  
+  /* Video Container Styles */
+  .video-container {
     position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
-}
-
-.youtube-overlay {
+  }
+  .youtube-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 15%; /* Justera höjden för att täcka titelområdet */
-    background: rgb(0, 0, 0); /* Genomskinlig svart overlay */
-    pointer-events: none; /* Se till att klick går igenom till iframe */
-    z-index: 1; /* Placera overlay ovanpå iframe */
-}
-
-iframe {
-    border: none; /* Ta bort iframe-ram */
+    height: 15%;
+    background: rgb(0, 0, 0);
+    pointer-events: none;
+    z-index: 1;
+  }
+  iframe {
+    border: none;
     width: 100%;
     height: 100%;
-}
-
-/* Responsive Design for Smaller Screens */
-@media (max-width: 768px) {
-    table {
-        width: calc(100% - 16px); /* Minska marginalen för mindre skärmar */
-        margin: 8px; /* Minska marginalen för mindre skärmar */
-        margin-bottom: 20px; /* Ytterligare marginal under tabellen */
-        border-spacing: 4px; /* Minska mellanrummet mellan celler */
+  }
+  
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 768px) {
+    html, body {
+      overflow: auto;
     }
-
-    th, td {
-        width: 80px; /* Ytterligare minska bredden för mindre skärmar */
-        height: 100px; /* Ytterligare minska höjden för mindre skärmar */
+    .gameboard-container table {
+      width: calc(100% - 16px);
+      margin: 8px;
+      border-spacing: 4px;
     }
-
-    th {
-        font-size: 1em; /* Minska textstorleken för mindre skärmar */
-        padding: 8px; /* Minska padding för mindre skärmar */
+    .gameboard-container tr {
+      height: auto;
     }
-
-    td {
-        font-size: 1.2rem; /* Minska textstorleken för mindre skärmar */
+    .gameboard-container th,
+    .gameboard-container td {
+      width: calc(100% / 5);
+      font-size: 1em;
     }
-
+    .gameboard-container th {
+      padding: 8px;
+    }
+    .gameboard-container td {
+      font-size: 1.2rem;
+    }
     .buttons-container {
-        margin-bottom: 20px; /* Ytterligare marginal under knapparna */
+      margin-bottom: 20px;
     }
-
-    .reset-button, .admin-button {
-        padding: 8px 16px; /* Minska padding för mindre skärmar */
-        font-size: 0.9rem; /* Minska textstorleken för mindre skärmar */
+    .reset-button,
+    .admin-button,
+    .fullscreen-button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
     }
-}
+  }

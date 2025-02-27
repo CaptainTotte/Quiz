@@ -92,7 +92,7 @@ async def update_questions(
         data["questions"][points].append({"category": category, "type": type, "content": content})
     save_questions(data)
     response = RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
-    response.set_cookie(key="flash_message", value="Frågan har uppdaterats!")
+    response.set_cookie(key="flash_message", value="The question has been updated!")
     return response
 
 # Endpoint to delete a question
@@ -124,10 +124,10 @@ async def update_category(
                     question["category"] = new_category
         save_questions(data)
         response = RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
-        response.set_cookie(key="flash_message", value=f"Kategori '{current_category}' har uppdaterats till '{new_category}'.")
+        response.set_cookie(key="flash_message", value=f"Category '{current_category}' has been updated to '{new_category}'.")
         return response
     else:
-        raise HTTPException(status_code=400, detail="Kategorin finns inte.")
+        raise HTTPException(status_code=400, detail="Category does not exist.")
 
 # Existing endpoints
 @app.get("/categories")

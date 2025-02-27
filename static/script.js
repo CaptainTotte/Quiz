@@ -26,9 +26,9 @@ async function loadGame() {
         categories.forEach(category => {
             const cell = row.insertCell();
             cell.innerText = point;
-            cell.dataset.category = category; // Store category in dataset
-            cell.dataset.points = point; // Store points in dataset
-            cell.onclick = () => showQuestion(category, point, cell); // Pass the clicked cell
+            cell.dataset.category = category;
+            cell.dataset.points = point;
+            cell.onclick = () => showQuestion(category, point, cell);
         });
     });
 }
@@ -112,12 +112,8 @@ resetButton.addEventListener('click', () => {
     });
 });
 
-// Close the modal when 'ESC' is pressed or when clicking outside the modal
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        closeModal();
-    }
-});
+// Removed keydown event for ESC key to close the modal.
+// The modal now only closes when clicking outside it.
 
 modal.addEventListener('click', (event) => {
     if (event.target === modal) {
@@ -137,4 +133,4 @@ function closeModal() {
     }, 300); // Match the duration of the fade-out animation
 }
 
-window.onload = loadGame; // Load game when the page loads
+window.onload = loadGame;
